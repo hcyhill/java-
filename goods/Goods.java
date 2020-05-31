@@ -7,174 +7,7 @@ public class Goods {
     Statement stmt = dbCon.createStatement();
     ResultSet rs = null;
 
-    public Goods(String account) throws SQLException { // 貨物
-        
-        rs = stmt.executeQuery("select * from goods");
-        System.out.println("==============================商品表==================================");
-        System.out.printf("%-10s\t%-10s\t%-10s\t%-10s\t%-10s\t\n", "商品", "價格/數量", "", "價格/重量", "");
-        try {
-
-            while (rs.next()) {
-                System.out.printf("%-10s\t%10s\t%-10s\t%10s\t%-10s\t\n", rs.getString("gName"),
-                        rs.getString("gQuantity"), "元/個", rs.getString("gWeight"), "元/克");
-            }
-            System.out.println("======================================================================");
-
-        } catch (SQLException e) {
-
-        }
-        System.out.println("(1)Buy\n" + "(2)Back");
-        int a = input.nextInt();
-        switch (a) {
-            case 1:
-                buy(account);
-                /*rs = stmt.executeQuery("select * from goods");
-                System.out.print("選擇商品 : ");
-                int num;
-                String goodsName = input.next();
-                try {
-                    while (rs.next()) {
-                        while (goodsName.equals(rs.getString("gName"))) { // 為什麼不進去if判斷式???????
-                            String goodsQuantity = rs.getString("gQuantity");
-                            String goodsWeight = rs.getString("gWeight");
-                            String goodsWrite = rs.getString("gWrite");
-                            boolean storage = true;
-                            boolean q = goodsQuantity.equals("-");
-                            boolean w = goodsWeight.equals("-");
-                            boolean wr = goodsWrite.equals("TRUE");
-                            while (storage) {
-                                while (!q && w) { // 只有數量
-                                    if (wr) {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        quantity(account, goodsName, num, goodsQuantity, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        quantity(account, goodsName, num, goodsQuantity);
-                                        storage = false;
-                                        break;
-                                    }
-
-                                }
-                                while (q && !w) { // 只有重量
-                                    if (wr) {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        weight(account, goodsName, num, goodsWeight, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        weight(account, goodsName, num, goodsWeight);
-                                        storage = false;
-                                        break;
-                                    }
-                                }
-                                while (!q && !w) {
-                                    if (wr) {
-                                        choose(account, goodsName, goodsQuantity, goodsWeight, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        choose(account, goodsName, goodsQuantity, goodsWeight);
-                                        storage = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            Memberdata aMemberdata = new Memberdata();
-                            aMemberdata.memberLogin(account);
-                        }
-                    }
-                } finally {
-                    try {
-                        stmt.close();
-                    } catch (SQLException error) {
-                        error.printStackTrace();
-                    }
-                }*/
-                break;
-            case 2:
-                new Memberdata().memberLogin(account);
-                break;
-        }
-
-    }
-
-    public void buy(String account) throws SQLException{
-        rs = stmt.executeQuery("select * from goods");
-                System.out.print("選擇商品 : ");
-                int num;
-                String goodsName = input.next();
-                try {
-                    while (rs.next()) {
-                        while (goodsName.equals(rs.getString("gName"))) { // 為什麼不進去if判斷式???????
-                            String goodsQuantity = rs.getString("gQuantity");
-                            String goodsWeight = rs.getString("gWeight");
-                            String goodsWrite = rs.getString("gWrite");
-                            boolean storage = true;
-                            boolean q = goodsQuantity.equals("-");
-                            boolean w = goodsWeight.equals("-");
-                            boolean wr = goodsWrite.equals("TRUE");
-                            while (storage) {
-                                while (!q && w) { // 只有數量
-                                    if (wr) {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        quantity(account, goodsName, num, goodsQuantity, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        quantity(account, goodsName, num, goodsQuantity);
-                                        storage = false;
-                                        break;
-                                    }
-
-                                }
-                                while (q && !w) { // 只有重量
-                                    if (wr) {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        weight(account, goodsName, num, goodsWeight, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        System.out.println("輸入數量 : ");
-                                        num = input.nextInt();
-                                        weight(account, goodsName, num, goodsWeight);
-                                        storage = false;
-                                        break;
-                                    }
-                                }
-                                while (!q && !w) {
-                                    if (wr) {
-                                        choose(account, goodsName, goodsQuantity, goodsWeight, goodsWrite);
-                                        storage = false;
-                                        break;
-                                    } else {
-                                        choose(account, goodsName, goodsQuantity, goodsWeight);
-                                        storage = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            Memberdata aMemberdata = new Memberdata();
-                            aMemberdata.memberLogin(account);
-                        }
-                    }
-                } finally {
-                    try {
-                        stmt.close();
-                    } catch (SQLException error) {
-                        error.printStackTrace();
-                    }
-                }
+    public Goods() throws SQLException {
 
     }
 
@@ -192,7 +25,7 @@ public class Goods {
                     storage = false;
                     break;
                 case 2:
-                    System.out.println("輸入數量 : ");
+                    System.out.println("輸入重量 : ");
                     num = input.nextInt();
                     weight(account, goodsName, num, goodsWeight);
                     storage = false;
@@ -216,7 +49,7 @@ public class Goods {
                     storage = false;
                     break;
                 case 2:
-                    System.out.println("輸入數量 : ");
+                    System.out.println("輸入重量 : ");
                     num = input.nextInt();
                     weight(account, goodsName, num, goodsWeight, goodsWrite);
                     storage = false;

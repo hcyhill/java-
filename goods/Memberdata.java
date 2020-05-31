@@ -9,8 +9,8 @@ class Memberdata extends Login {
     private static Connection dbCon = Connect.getConnection(); // 連接DB
 
     public Memberdata() {
-        this.name = "";
-        this.account = "";
+        // this.name = "";
+        // this.account = "";
     }
 
     public void memberSignup(String name, String account, String password, String privilege) throws SQLException {
@@ -43,13 +43,13 @@ class Memberdata extends Login {
         try {
             while (rs.next()) {// 從數據庫中，一行一行查找，直到沒有下一筆資料
                 if (this.account.equals(rs.getString("mAccount")) && this.password.equals(rs.getString("mPassword"))) {// 判斷是否有登入資料
-                    if (rs.getString("mPrivilege") == "FALSE") { // 判斷是否為員工 
-                        //消費者模式
+                    if (rs.getString("mPrivilege") == "FALSE") { // 判斷是否為員工
+                        // 消費者模式
                         System.out.println("Login Successful!");
                         ConsumerMode cMode = new ConsumerMode();
                         cMode.mode(this.account);
                         break;
-                    } else { 
+                    } else {
                         // 員工模式
                         System.out.println("Login Successful!");
                         StaffMode sMode = new StaffMode();
@@ -78,35 +78,4 @@ class Memberdata extends Login {
         }
     }
 
-    public void memberLogin(String account) throws SQLException {
-        this.account = account;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            stmt = dbCon.createStatement();
-            rs = stmt.executeQuery("select * from member");
-            while (rs.next()) {// 從數據庫中，一行一行查找，直到沒有下一筆資料
-                if (this.account.equals(rs.getString("mAccount"))) {
-                    if (rs.getString("mPrivilege") == "FALSE") { // 判斷是否為員工
-                        // 消費者模式
-                        ConsumerMode cMode = new ConsumerMode();
-                        cMode.mode(this.account);
-                        break;
-                    } else {
-                        // 員工模式
-                        StaffMode sMode = new StaffMode();
-                        sMode.mode(this.account);
-                        break;
-                    }
-                }
-            }
-        } finally {
-            try {
-                stmt.close();
-            } catch (SQLException error) {
-                error.printStackTrace();
-            }
-        }
-    }
 }

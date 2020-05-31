@@ -6,12 +6,12 @@ public class Login {
     Scanner input = new Scanner(System.in);
 
     public Login() {
+
     }
 
     public void loginMenu() throws SQLException {
-        System.out.println("=====Good Life Foods=====\n" + "(1)Log In\n" + "(2)Sign Up");
+        System.out.println("=====Good Life Foods=====\n" + "(1)Log In\n" + "(2)Sign Up\n" +"(3)Exit");
         int a = input.nextInt();
-        System.out.println("========================");
         switch (a) {
             case 1:
                 log();
@@ -25,6 +25,8 @@ public class Login {
                 else
                     System.exit(0);
                 break;
+            case 3:
+                System.exit(0);
             default:
                 System.out.println("Try Again");
                 loginMenu();
@@ -33,17 +35,17 @@ public class Login {
     }
 
     public void log() throws SQLException {
-
+        System.out.println("============Log In============");
         System.out.print("Account(phone number) : ");
         String aAccount = input.next();
         System.out.print("Password : ");
         String aPassword = input.next();
-        Memberdata mMemberdata = new Memberdata();
-        mMemberdata.memberLogin(aAccount, aPassword);
+        new Memberdata().memberLogin(aAccount, aPassword);
 
     }
 
     public void sign() throws SQLException {
+        System.out.println("============Sign up============");
         String privilege = "false";
         boolean key = true;
         while (key) {
@@ -62,8 +64,7 @@ public class Login {
             else if (!bPassword.equals(cPassword))
                 System.out.println("Sign-up Failed");
             else {
-                Memberdata mMemberdata = new Memberdata();
-                mMemberdata.memberSignup(bName, bAccount, bPassword, privilege);
+                new Memberdata().memberSignup(bName, bAccount, bPassword, privilege);
                 key = false;
             }
         }
