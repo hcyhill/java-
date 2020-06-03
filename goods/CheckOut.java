@@ -13,7 +13,7 @@ public class CheckOut {
         System.out.println("==============================結帳==================================");
         if (x < 400) {
             System.out.println("未達最低金額,無法宅配");
-            return x;
+            return 0;
         } else if (x >= 400 && x < 1200) {
             x = x + 200;
             System.out.println("運費200元");
@@ -53,6 +53,7 @@ public class CheckOut {
             while (rs.next()) {
                 if (account.equals(rs.getString("account"))) {
                     while (key) {
+                        System.out.print("地址 : ");
                         address = input.next();
                         key = false;
                     }

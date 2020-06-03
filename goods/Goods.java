@@ -19,13 +19,13 @@ public class Goods {
         while (storage) {
             switch (num) {
                 case 1:
-                    System.out.println("輸入數量 : ");
+                    System.out.print("輸入數量 : ");
                     num = input.nextInt();
                     quantity(account, goodsName, num, goodsQuantity);
                     storage = false;
                     break;
                 case 2:
-                    System.out.println("輸入重量 : ");
+                    System.out.print("輸入重量 : ");
                     num = input.nextInt();
                     weight(account, goodsName, num, goodsWeight);
                     storage = false;
@@ -43,13 +43,13 @@ public class Goods {
         while (storage) {
             switch (num) {
                 case 1:
-                    System.out.println("輸入數量 : ");
+                    System.out.print("輸入數量 : ");
                     num = input.nextInt();
                     quantity(account, goodsName, num, goodsQuantity, goodsWrite);
                     storage = false;
                     break;
                 case 2:
-                    System.out.println("輸入重量 : ");
+                    System.out.print("輸入重量 : ");
                     num = input.nextInt();
                     weight(account, goodsName, num, goodsWeight, goodsWrite);
                     storage = false;
@@ -65,7 +65,7 @@ public class Goods {
 
     public void quantity(String account, String x, int y, String z, String goodsWrite) throws SQLException {
         int sum = y * Integer.valueOf(z);
-        System.out.println("自定義文字: ");
+        System.out.print("自定義文字: ");
         String s = input.next();
         dbWrite(account, x, y, sum, s);
     }
@@ -77,7 +77,7 @@ public class Goods {
 
     public void weight(String account, String x, int y, String z, String goodsWrite) throws SQLException {
         int sum = y * Integer.valueOf(z);
-        System.out.println("自定義文字: ");
+        System.out.print("自定義文字: ");
         String s = input.next();
         dbWrite(account, x, y, sum, s);
     }
@@ -87,7 +87,7 @@ public class Goods {
         try {
             stmt.executeUpdate("insert into shoppingcart (account,goods,num,price,write) VALUES ('" + account + "','"
                     + x + "','" + y + "','" + sum + "','null')");
-            System.out.println("已加入購物車");
+            System.out.println("成功加入購物車");
         } catch (SQLException e) {
         }
     }

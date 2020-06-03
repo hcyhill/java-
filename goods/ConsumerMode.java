@@ -12,39 +12,11 @@ public class ConsumerMode extends Mode {
         switch (a) {
             case 1:
                 aMenu.products(account);
-                System.out.println("(1)Buy\n" + "(2)Back");
-                a = input.nextInt();
-                switch (a) {
-                    case 1:
-                        aMenu.buy(account);
-                    case 2:
-                        mode(account);
-                        break;
-                }
+                buySelect(account);
                 break;
             case 2:
                 int money = aMenu.shoppingCart(account);
-                boolean again = true;
-                while (again) {
-                    System.out.println("===================================================================");
-                    System.out.println("(1)Products\n" + "(2)Checkout\n" + "(3)Back");
-                    a = input.nextInt();
-                    switch (a) {
-                        case 1:
-                            aMenu.products(account);
-                            again = false;
-                            break;
-                        case 2:
-                            aMenu.pay(account, money);
-                            again = false;
-                            break;
-                        case 3:
-                            mode(account);
-                            break;
-                        default:
-                            System.out.println("Try Again");
-                    }
-                }
+                shopSelect(account,money);
                 break;
             case 3:
                 int x = aMenu.order(account);
@@ -58,9 +30,41 @@ public class ConsumerMode extends Mode {
             default:
                 System.out.println("Try Again");
                 mode(account);
-
         }
-
+    }
+    public void buySelect(String account) throws SQLException {
+        System.out.println("(1)Buy\n" + "(2)Back");
+        int a = input.nextInt();
+        switch (a) {
+            case 1:
+                aMenu.buy(account);
+            case 2:
+                mode(account);
+                break;
+        }
+    }
+    public void shopSelect(String account,int money) throws SQLException{
+        boolean again = true;
+        while (again) {
+            System.out.println("======================================================================");
+            System.out.println("(1)Products\n" + "(2)Checkout\n" + "(3)Back");
+            int a = input.nextInt();
+            switch (a) {
+                case 1:
+                    aMenu.products(account);
+                    buySelect(account);
+                    again = false;
+                    break;
+                case 2:
+                    aMenu.pay(account, money);
+                    again = false;
+                case 3:
+                    mode(account);
+                    break;
+                default:
+                    System.out.println("Try Again");
+            }
+        }
     }
 
 }

@@ -58,8 +58,8 @@ class Memberdata extends Login {
                     }
                 } else {
                     if (rs.isLast()) {// 判斷是否為最後一筆資料
+                        System.out.println("Unknown User Name or Bad Password !!");
                         System.out.println("========================");
-                        System.out.println("unknown user name or bad password");
                         System.out.println("(1)Log In\n" + "Press any key to end");
                         int a = input.nextInt();
                         if (a == 1) {

@@ -28,7 +28,6 @@ public class Menu {
         } catch (SQLException e) {
 
         }
-        // new Goods(account);
     }
 
     public void buy(String account) throws SQLException {
@@ -39,7 +38,7 @@ public class Menu {
         Goods g = new Goods();
         try {
             while (rs.next()) {
-                while (goodsName.equals(rs.getString("gName"))) { // 為什麼不進去if判斷式???????
+                if (goodsName.equals(rs.getString("gName"))) { // 為什麼不進去if判斷式???????
                     String goodsQuantity = rs.getString("gQuantity");
                     String goodsWeight = rs.getString("gWeight");
                     String goodsWrite = rs.getString("gWrite");
@@ -48,24 +47,24 @@ public class Menu {
                     boolean wr = goodsWrite.equals("TRUE");
                     if (!q && w) {
                         if (wr) {
-                            System.out.println("輸入數量 : ");
+                            System.out.print("輸入數量 : ");
                             num = input.nextInt();
                             g.quantity(account, goodsName, num, goodsQuantity, goodsWrite);
                             break;
                         } else {
-                            System.out.println("輸入數量 : ");
+                            System.out.print("輸入數量 : ");
                             num = input.nextInt();
                             g.quantity(account, goodsName, num, goodsQuantity);
                             break;
                         }
                     } else if (q && !w) {
                         if (wr) {
-                            System.out.println("輸入重量 : ");
+                            System.out.print("輸入重量 : ");
                             num = input.nextInt();
                             g.weight(account, goodsName, num, goodsWeight, goodsWrite);
                             break;
                         } else {
-                            System.out.println("輸入重量 : ");
+                            System.out.print("輸入重量 : ");
                             num = input.nextInt();
                             g.weight(account, goodsName, num, goodsWeight);
                             break;
@@ -79,12 +78,16 @@ public class Menu {
                             break;
                         }
                     }
+                }else{
+                    System.out.println("選擇失敗");
                 }
             }
-        } finally {
+        }
+    finally {
             try {
                 stmt.close();
             } catch (SQLException error) {
+                //System.out.println("選擇失敗");
                 error.printStackTrace();
             }
         }
@@ -168,8 +171,8 @@ public class Menu {
 
     public void pay(String account, int money) throws SQLException {
         int x = new CheckOut().Amount(money);
-        new CheckOut().record(account, x);
-
+        if (x != 0)
+            new CheckOut().record(account, x);
     }
 
     public void addProduct() throws SQLException {
